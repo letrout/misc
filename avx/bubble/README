@@ -2,23 +2,25 @@ bubble.c initially from https://github.com/lemire/Code-used-on-Daniel-Lemire-s-b
 See: https://lemire.me/blog/2018/08/13/the-dangers-of-avx-512-throttling-myth-or-reality/
 
 gcc
+tested with gcc 8.3.0 using https://hub.docker.com/_/gcc 8.3.0
 
 No AVX
-docker run --rm -v "$PWD":/usr/src/app -w /usr/src/app gcc:8.3.0 gcc -O3  -march=x86-64 -mtune=generic -lpthread -fopt-info-vec-all -o gcc/bubble_generic_gcc bubble_avx2.c 2>gcc/generic_gcc.out
+gcc -O3  -march=x86-64 -mtune=generic -lpthread -fopt-info-vec-all -o gcc/bubble_generic_gcc bubble_avx2.c 2>gcc/generic_gcc.out
 
 AVX2
-docker run --rm -v "$PWD":/usr/src/app -w /usr/src/app gcc:8.3.0 gcc -O3 -march=haswell -mtune=haswell -mavx2 -lpthread -fopt-info-vec-all -o gcc/bubble_avx2_gcc bubble_avx2.c 2>gcc/avx2_gcc.out
+gcc -O3 -march=haswell -mtune=haswell -mavx2 -lpthread -fopt-info-vec-all -o gcc/bubble_avx2_gcc bubble_avx2.c 2>gcc/avx2_gcc.out
 
 AVX512
-docker run --rm -v "$PWD":/usr/src/app -w /usr/src/app gcc:8.3.0 gcc -O3 -march=skylake-avx512 -mtune=skylake-avx512 -mavx512f -mavx512cd -lpthread -fopt-info-vec-all -o gcc/bubble_avx512_gcc bubble_avx2.c 2>gcc/avx512_gcc.out
+gcc -O3 -march=skylake-avx512 -mtune=skylake-avx512 -mavx512f -mavx512cd -lpthread -fopt-info-vec-all -o gcc/bubble_avx512_gcc bubble_avx2.c 2>gcc/avx512_gcc.out
 
 clang
+tested with clang 8.0.1 using https://cloud.docker.com/u/jluth/repository/docker/jluth/docker-clang 8.0.1-18.04
 
 No AVX
-docker run --rm -v "$PWD":/usr/src/app -w /usr/src/app clang:8-18.10 clang-8 -O3  -march=x86-64 -mtune=generic -pthread -o clang/bubble_generic_clang bubble_avx2.c 2>clang/generic_clang.out
+clang-8 -O3  -march=x86-64 -mtune=generic -pthread -o clang/bubble_generic_clang bubble_avx2.c 2>clang/generic_clang.out
 
 AVX2
-docker run --rm -v "$PWD":/usr/src/app -w /usr/src/app clang:8-18.10 clang-8 -O3 -march=haswell -mtune=haswell -mavx2 -pthread -o clang/bubble_avx2_clang bubble_avx2.c 2>clang/avx2_clang.out
+clang-8 -O3 -march=haswell -mtune=haswell -mavx2 -pthread -o clang/bubble_avx2_clang bubble_avx2.c 2>clang/avx2_clang.out
 
 AVX512
-docker run --rm -v "$PWD":/usr/src/app -w /usr/src/app clang:8-18.10 clang-8 -O3 -march=skylake-avx512 -mtune=skylake-avx512 -mavx512f -mavx512cd -pthread -o clang/bubble_avx512_clang bubble_avx2.c 2>clang/avx512_clang.out
+clang-8 -O3 -march=skylake-avx512 -mtune=skylake-avx512 -mavx512f -mavx512cd -pthread -o clang/bubble_avx512_clang bubble_avx2.c 2>clang/avx512_clang.out
