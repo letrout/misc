@@ -6,6 +6,8 @@
 #include <stdio.h>
 #ifdef __AVX512DQ__
 #include <immintrin.h>
+#elif __AVX2__
+#include <immintrin.h>
 #endif
 
 atomic_int acnt = 0;
@@ -47,6 +49,13 @@ void *athread(void *arg) {
           _mm512_mullo_epi64(_mm512_loadu_si512(&arr[i]),
                              _mm512_set1_epi64(factor)));
       i += 8;
+#elif __AVX2__
+      __m256i vector = _mm256_load_si256( (__m256i*)arr[i] );
+      _mm256_storeu_si256(
+          &vector,
+          _mm256_mullo_epi32(_mm256_loadu_si256(&vector),
+                             _mm256_set1_epi32(factor)));
+      i += 4;
 #else
       arr[i] *= factor;
       i++;
@@ -65,6 +74,11 @@ int main(int argc, char *argv[]) {
   printf("using avx512\n");
 #else 
   printf("not using avx512\n");
+#endif
+#ifdef __AVX2__
+  printf("using avx2\n");
+#else
+  printf("not using avx2\n");
 #endif
   pthread_t threads[nthreads];
   uint64_t factors[nthreads];
