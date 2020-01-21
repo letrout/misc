@@ -1,7 +1,21 @@
 #include <x86intrin.h>
 
+void xor_byte(
+    char *r1,   /* region 1 */
+    char *r2,   /* region 2 */
+    char *r3,   /* r3 = r1 ^ r2 */
+    int size    /* bytes of region */
+)
+{
+    int j;
+    for(j=0; j<size; j++)
+    {
+        r3[j] = r1[j] ^ r2[j];
+    }
+}
+
 void xor_sse2(
-    char *r1,    /* region 1 */
+    char *r1,   /* region 1 */
     char *r2,   /* region 2 */
     char *r3,   /* r3 = r1 ^ r2 */
     int size    /* bytes of region */
