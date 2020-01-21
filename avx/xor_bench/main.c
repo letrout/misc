@@ -41,4 +41,14 @@ int main(int argc, char *argv[])
     printf("AVX2 XOR completed: %f\n", t_elapsed);
 #endif
 
+#ifdef __AVX512DQ__
+    t_before = gettime();
+    for (j=0; j<LOOPS; j++)
+    {
+        xor_avx512(r1 ,r2, r3, SIZE);
+    }
+    t_elapsed = gettime() - t_before;
+    printf("AVX512 XOR completed: %f\n", t_elapsed);
+#endif
+
 }

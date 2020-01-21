@@ -1,2 +1,5 @@
 For AVX2 support:
-CFLAGS='mavx2' make
+CFLAGS='-march=haswell -mtune=haswell -mavx2' make
+
+For AVX512 support:
+CFLAGS='-march=skylake-avx512 -mtune=skylake-avx512 -mavx512f -mavx512cd' make

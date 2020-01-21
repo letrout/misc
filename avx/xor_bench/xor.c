@@ -53,3 +53,24 @@ void xor_avx2(
     }
 }
 #endif
+
+#ifdef __AVX512DQ__
+void xor_avx512(
+    char *r1,   /* region 1 */
+    char *r2,   /* region 2 */
+    char *r3,   /* r3 = r1 ^ r2 */
+    int size    /* bytes of region */
+    )
+{
+    __m512i *b1, *b2, *b3;
+    int vec_width = 64, j;
+    int loops = size / vec_width;
+    for(j = 0;j<loops;j++)
+    {
+        b1 = (__m512i *)(r1 + j*vec_width);
+        b2 = (__m512i *)(r2 + j*vec_width);
+        b3 = (__m512i *)(r3 + j*vec_width);
+        *b3 = _mm512_xor_epi32(*b1, *b2);
+    }
+}
+#endif
