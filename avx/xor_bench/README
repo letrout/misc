@@ -1,2 +1,2 @@
 For AVX2 support:
-make CLFAGS='-march=haswell -mtune=haswell -mavx2'
+CFLAGS='mavx2' make
