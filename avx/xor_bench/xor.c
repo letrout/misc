@@ -29,6 +29,7 @@ void xor_long(
     }
 }
 
+#ifdef __SSE2__
 void xor_sse2(
     char *r1,   /* region 1 */
     char *r2,   /* region 2 */
@@ -47,6 +48,7 @@ void xor_sse2(
         *b3 = _mm_xor_si128(*b1, *b2);
     }
 }
+#endif
 
 #ifdef __AVX2__
 void xor_avx2(

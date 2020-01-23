@@ -31,6 +31,7 @@ int main(int argc, char *argv[])
     t_elapsed = gettime() - t_before;
     printf("long XOR completed: %f\n", t_elapsed);
 
+#ifdef __SSE2__
     t_before = gettime();
     for (j=0; j<LOOPS; j++)
     {
@@ -38,6 +39,7 @@ int main(int argc, char *argv[])
     }
     t_elapsed = gettime() - t_before;
     printf("SSE2 XOR completed: %f\n", t_elapsed);
+#endif
 
 #ifdef __AVX2__
     t_before = gettime();
