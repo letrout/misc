@@ -14,6 +14,21 @@ void xor_byte(
     }
 }
 
+void xor_long(
+    char *r1,   /* region 1 */
+    char *r2,   /* region 2 */
+    char *r3,   /* r3 = r1 ^ r2 */
+    int size    /* bytes of region */
+)
+{
+    int vec_width = sizeof(long), j;
+    int loops = size / vec_width;
+    for(j=0; j<loops; j++)
+    {
+        r3[j] = r1[j] ^ r2[j];
+    }
+}
+
 void xor_sse2(
     char *r1,   /* region 1 */
     char *r2,   /* region 2 */

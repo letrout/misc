@@ -26,6 +26,14 @@ int main(int argc, char *argv[])
     t_before = gettime();
     for (j=0; j<LOOPS; j++)
     {
+        xor_long(r1 ,r2, r3, SIZE);
+    }
+    t_elapsed = gettime() - t_before;
+    printf("long XOR completed: %f\n", t_elapsed);
+
+    t_before = gettime();
+    for (j=0; j<LOOPS; j++)
+    {
         xor_sse2(r1 ,r2, r3, SIZE);
     }
     t_elapsed = gettime() - t_before;
