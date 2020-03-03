@@ -50,14 +50,16 @@ int main(int argc, char *argv[])
 		    usage();
 		}
 	}
-
-    t_before = gettime();
-    for (j=0; j<loops; j++)
+    if (bytewise)
     {
-        xor_byte(r1 ,r2, r3, SIZE);
+        t_before = gettime();
+        for (j=0; j<loops; j++)
+        {
+            xor_byte(r1 ,r2, r3, SIZE);
+        }
+        t_elapsed = gettime() - t_before;
+        printf("Byte-wise XOR completed: %f\n", t_elapsed);
     }
-    t_elapsed = gettime() - t_before;
-    printf("Byte-wise XOR completed: %f\n", t_elapsed);
 
     t_before = gettime();
     for (j=0; j<loops; j++)
