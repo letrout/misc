@@ -23,9 +23,6 @@ usage()
 
 int main(int argc, char *argv[])
 {
-	char r1[SIZE+1] = "",
-    r2[SIZE+1] = "",
-    r3[SIZE+1] = "";
     int j;
     double t_before, t_elapsed;
     int bytewise = 0;
@@ -50,12 +47,17 @@ int main(int argc, char *argv[])
 		    usage();
 		}
 	}
+
+    char r1[bufsize+1],
+    r2[bufsize+1],
+    r3[bufsize+1];
+
     if (bytewise)
     {
         t_before = gettime();
         for (j=0; j<loops; j++)
         {
-            xor_byte(r1 ,r2, r3, SIZE);
+            xor_byte(r1 ,r2, r3, bufsize);
         }
         t_elapsed = gettime() - t_before;
         printf("Byte-wise XOR completed: %f\n", t_elapsed);
@@ -64,7 +66,7 @@ int main(int argc, char *argv[])
     t_before = gettime();
     for (j=0; j<loops; j++)
     {
-        xor_long(r1 ,r2, r3, SIZE);
+        xor_long(r1 ,r2, r3, bufsize);
     }
     t_elapsed = gettime() - t_before;
     printf("long XOR completed: %f\n", t_elapsed);
@@ -73,7 +75,7 @@ int main(int argc, char *argv[])
     t_before = gettime();
     for (j=0; j<loops; j++)
     {
-        xor_sse2(r1 ,r2, r3, SIZE);
+        xor_sse2(r1 ,r2, r3, bufsize);
     }
     t_elapsed = gettime() - t_before;
     printf("SSE2 XOR completed: %f\n", t_elapsed);
@@ -83,7 +85,7 @@ int main(int argc, char *argv[])
     t_before = gettime();
     for (j=0; j<loops; j++)
     {
-        xor_avx2(r1 ,r2, r3, SIZE);
+        xor_avx2(r1 ,r2, r3, bufsize);
     }
     t_elapsed = gettime() - t_before;
     printf("AVX2 XOR completed: %f\n", t_elapsed);
@@ -93,7 +95,7 @@ int main(int argc, char *argv[])
     t_before = gettime();
     for (j=0; j<loops; j++)
     {
-        xor_avx512(r1 ,r2, r3, SIZE);
+        xor_avx512(r1 ,r2, r3, bufsize);
     }
     t_elapsed = gettime() - t_before;
     printf("AVX512 XOR completed: %f\n", t_elapsed);
