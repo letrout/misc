@@ -25,9 +25,15 @@ usage()
 	fprintf(stderr, "\t-l Loop count <%d>\n", LOOPS);
     fprintf(stderr, "\t--run_bytewise Include Bytewise xor test <false>\n");
     fprintf(stderr, "\t--run_long Include long int xor test <false>\n");
+#ifdef __SSE2__
     fprintf(stderr, "\t--run_sse2 Include SSE2 xor test <false>\n");
+#endif
+#ifdef __AVX2__
     fprintf(stderr, "\t--run_avx2 Include AVX2 xor test <false>\n");
+#endif
+#ifdef __AVX512DQ__
     fprintf(stderr, "\t--run_avx512 Include AVX512 xor test <false>\n");
+#endif
 	exit(EXIT_FAILURE);
 }
 
