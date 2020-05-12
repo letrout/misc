@@ -96,7 +96,7 @@ int main(int argc, char *argv[])
             xor_byte(r1 ,r2, r3, bufsize);
         }
         t_elapsed = gettime() - t_before;
-        printf("Byte-wise XOR completed: %f sec, %f MiB/s\n",
+        printf("Byte-wise XOR completed:\t%f sec\t%f MiB/s\n",
             t_elapsed, mib/t_elapsed);
     }
 
@@ -108,7 +108,7 @@ int main(int argc, char *argv[])
             xor_long(r1 ,r2, r3, bufsize);
         }
         t_elapsed = gettime() - t_before;
-        printf("long XOR completed: %f sec, %f MiB/s\n",
+        printf("long XOR completed:\t%f sec\t%f MiB/s\n",
             t_elapsed, mib/t_elapsed);
     }
 
@@ -121,7 +121,7 @@ int main(int argc, char *argv[])
             xor_sse2(r1 ,r2, r3, bufsize);
         }
         t_elapsed = gettime() - t_before;
-        printf("SSE2 XOR completed: %f sec, %f MiB/s\n",
+        printf("SSE2 XOR completed:\t%f sec\t%f MiB/s\n",
             t_elapsed, mib/t_elapsed);
     }
 #endif
@@ -135,7 +135,7 @@ int main(int argc, char *argv[])
             xor_avx2(r1 ,r2, r3, bufsize);
         }
         t_elapsed = gettime() - t_before;
-        printf("AVX2 XOR completed: %f sec, %f MiB/s\n",
+        printf("AVX2 XOR completed:\t%f sec\t%f MiB/s\n",
             t_elapsed, mib/t_elapsed);
     }
 #endif
@@ -149,7 +149,7 @@ int main(int argc, char *argv[])
             xor_avx512(r1 ,r2, r3, bufsize);
         }
         t_elapsed = gettime() - t_before;
-        printf("AVX512 XOR completed: %f sec, %f MiB/s\n",
+        printf("AVX512 XOR completed:\t%f sec\t%f MiB/s\n",
             t_elapsed, mib/t_elapsed);
     }
 #endif
